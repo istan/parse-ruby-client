@@ -9,6 +9,9 @@ module Parse
     # The default hostname for communication with the Parse API.
     HOST            = "api.parse.com"
 
+    # The version of the REST API implemented by this module.
+    VERSION         = "parse"
+
     # HTTP Headers
     # ----------------------------------------
 
@@ -114,8 +117,8 @@ module Parse
 
     CLASS_INSTALLATION = "_Installation"
 
-    USER_LOGIN_URI  = "/login"
-    PASSWORD_RESET_URI = "/requestPasswordReset"
+    USER_LOGIN_URI  = "/#{VERSION}/login"
+    PASSWORD_RESET_URI = "/#{VERSION}/requestPasswordReset"
 
     CLOUD_FUNCTIONS_PATH = "functions"
 
@@ -133,9 +136,9 @@ module Parse
     # class or instance (of object_id is non-nil).
     def Protocol.class_uri(class_name, object_id = nil)
       if object_id
-        "/classes/#{class_name}/#{object_id}"
+        "/#{VERSION}/classes/#{class_name}/#{object_id}"
       else
-        "/classes/#{class_name}"
+        "/#{VERSION}/classes/#{class_name}"
       end
     end
 
@@ -143,9 +146,9 @@ module Parse
     # class or instance (of object_id is non-nil).
     def Protocol.installation_uri(object_id = nil)
       if object_id
-        "/installations/#{object_id}"
+        "/#{VERSION}/installations/#{object_id}"
       else
-        "/installations"
+        "/#{VERSION}/installations"
       end
     end
 
@@ -153,28 +156,28 @@ module Parse
     # instance or the users category.
     def Protocol.user_uri(user_id = nil)
       if user_id
-        "/users/#{user_id}"
+        "/#{VERSION}/users/#{user_id}"
       else
-        "/users"
+        "/#{VERSION}/users"
       end
     end
 
     # Construct a uri referencing a file stored by the API.
     def Protocol.file_uri(file_name)
-      "/files/#{file_name}"
+      "/#{VERSION}/files/#{file_name}"
     end
 
     # Construct a uri to send a push notification via the API.
     def Protocol.push_uri
-      "/push"
+      "/#{VERSION}/push"
     end
 
     def Protocol.cloud_function_uri(function_name)
-      "/#{CLOUD_FUNCTIONS_PATH}/#{function_name}"
+      "/#{VERSION}/#{CLOUD_FUNCTIONS_PATH}/#{function_name}"
     end
 
     def Protocol.batch_request_uri
-      "/#{BATCH_REQUEST_URI}"
+      "/#{VERSION}/#{BATCH_REQUEST_URI}"
     end
   end
 end
